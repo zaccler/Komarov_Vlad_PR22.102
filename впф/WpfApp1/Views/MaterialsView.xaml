@@ -1,0 +1,44 @@
+<UserControl x:Class="WpfApp1.Views.MaterialsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Обновить" Width="90" Margin="0,0,6,0" Command="{Binding LoadCommand}"/>
+            <Button Content="Добавить" Width="90" Margin="0,0,6,0" Command="{Binding AddCommand}"/>
+            <Button Content="Удалить" Width="90" Margin="0,0,6,0" Command="{Binding DeleteCommand}"/>
+            <Button Content="Сохранить" Width="110" Command="{Binding SaveCommand}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="0" ItemsSource="{Binding Items}" SelectedItem="{Binding Selected}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" Width="60"/>
+                    <DataGridTextColumn Header="Код" Binding="{Binding Code}" Width="*"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="90"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock Text="Карточка" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Код"/><TextBox Text="{Binding Selected.Code}" Margin="0,4,0,10"/>
+                <TextBlock Text="Название"/><TextBox Text="{Binding Selected.Name}" Margin="0,4,0,10"/>
+                <TextBlock Text="Тип (raw/component)"/><TextBox Text="{Binding Selected.Type}" Margin="0,4,0,10"/>
+                <TextBlock Text="Ед. изм."/><TextBox Text="{Binding Selected.Unit}" Margin="0,4,0,10"/>
+                <TextBlock Text="Мин. остаток"/><TextBox Text="{Binding Selected.MinQty}" Margin="0,4,0,10"/>
+                <TextBlock Text="Рыночная цена"/><TextBox Text="{Binding Selected.MarketPrice}" Margin="0,4,0,10"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
